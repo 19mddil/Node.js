@@ -1,11 +1,12 @@
-const EventEmitter = require('events');
-const emmiter = new EventEmitter();
+const MyEvent = require('./myEvent');
+const myevent = new MyEvent();
 
-emmiter.on('event1', () => {
-    console.log("event1 called");
+myevent.on('event1', () => {
+    console.log("hi from event1");
 })
-emmiter.on('event2', (obj) => {
-    console.log("event2 : ", obj);
+myevent.on('event2', (obj) => {
+    console.log("hi from event2");
+    console.log(obj);
 })
-emmiter.emit('event1');
-emmiter.emit('event2', { name: "Kurt", band: "Nirvana" });
+myevent.emmitterFunction('event1', null);
+myevent.emmitterFunction('event2', { name: "Kurt", band: "Nirvana" });
