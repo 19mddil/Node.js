@@ -7,4 +7,4 @@ emitter.on('event1', () => {
     console.log('event1s been triggered');
 });
 
-emitter.function1('event1');
+emitter.function1('event1');    
