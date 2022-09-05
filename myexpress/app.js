@@ -10,13 +10,26 @@ app.get('/', (req, res) => {
 });
 app.get('/api/students', (req, res) => {
     fs.readFile('./db.json', 'utf-8', (err, data) => {
-        console.log(data);
-        res.send(data);
+        // console.log(data);
+        fs.readFile('./db.json', 'utf-8', (err, data) => {
+            // console.log(data);
+            const students = JSON.parse(data).students;
+            res.send(students);
+        })
     });
 });
 app.post('/api/students', (req, res) => {
-    console.log(req.body);
-    res.send("Posted");
+    // console.log(typeof req.body);
+    // console.log(JSON.parse(JSON.stringify(req.body)));
+    const student = req.body;
+    console.log(student);
+    fs.readFile('./db.json', 'utf-8', (err, data) => {
+        // console.log(data);
+        const students = JSON.parse(data);
+        students.students.push(student);
+        fs.writeFile('./db.json', JSON.stringify(students), (err) => res.send(student));
+        // console.log(students);
+    })
 });
 const port = 3000;
 
