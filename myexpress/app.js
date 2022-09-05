@@ -1,7 +1,8 @@
 const express = require('express');
-const fs = require('fs');
+const { dbGetStudents } = require('./db');
 
 const app = express();
+const db = require('./db');
 
 app.use(express.json());
 
@@ -9,32 +10,16 @@ app.get('/', (req, res) => {
     res.send("Hello from express");
 });
 app.get('/api/students', (req, res) => {
-    fs.readFile('./db.json', 'utf-8', (err, data) => {
-        // console.log(data);
-        fs.readFile('./db.json', 'utf-8', (err, data) => {
-            // console.log(data);
-            const students = JSON.parse(data).students;
-            res.send(students);
-        })
-    });
+    db.dbGetStudents('db.json').then(students => res.send(students));
 });
 app.post('/api/students', (req, res) => {
-    // console.log(typeof req.body);
-    // console.log(JSON.parse(JSON.stringify(req.body)));
     const student = req.body;
-    console.log(student);
-    fs.readFile('./db.json', 'utf-8', (err, data) => {
-        // console.log(data);
-        const students = JSON.parse(data);
-        students.students.push(student);
-        fs.writeFile('./db.json', JSON.stringify(students), (err) => res.send(student));
-        // console.log(students);
-    })
+    db.dbPostStudent('db.json', student).then(data => res.send(data));
 });
 const port = 3000;
 
 app.listen(port, () => {
-    console.log("Listening on port 3000");
+    console.log(`Listening on port ${port}`);
 })
 
 // console.log(app);

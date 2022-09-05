@@ -1,24 +1,26 @@
-{
-    "students": [
-        {
-            "id": 1,
-            "name": "Karim"
-        },
-        {
-            "id": 2,
-            "name": "Rahim"
-        },
-        {
-            "id": 3,
-            "name": "Md.Dilshadul Islam"
-        },
-        {
-            "id": 3,
-            "name": "Md.Dilshadul Islam"
-        },
-        {
-            "id": 3,
-            "name": "Md.Dilshadul Islam"
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "name": "Karim"
+    },
+    {
+        "id": 2,
+        "name": "Rahim"
+    },
+    {
+        "id": 3,
+        "name": "Md.Dilshadul Islam"
+    },
+    {
+        "id": 4,
+        "name": "Never Back Down!"
+    },
+    {
+        "id": 5,
+        "name": "Harsh Times"
+    },
+    {
+        "id": 6,
+        "name": "Never been loved"
+    }
+]
