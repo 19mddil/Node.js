@@ -1,4 +1,5 @@
 const fs = require('fs');
+// const { resolve } = require('path');
 
 function dbGetStudents(fileName) {
     let s = './' + fileName;
@@ -19,5 +20,19 @@ function dbPostStudent(fileName, studentObject,) {
         })
     }));
 }
+
+function dbGetStudentDetail(fileName, id) {
+    let s = './' + fileName;
+    return dbGetStudents(fileName).then(
+        students =>
+            // console.log(students);
+            new Promise(resolve => {
+                let student = students.filter(s => s.id === id);
+                // console.log(student);
+                resolve(student[0]);
+            })
+    );
+}
+module.exports.dbGetStudentDetail = dbGetStudentDetail;
 module.exports.dbGetStudents = dbGetStudents;
 module.exports.dbPostStudent = dbPostStudent;

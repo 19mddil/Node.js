@@ -16,6 +16,22 @@ app.post('/api/students', (req, res) => {
     const student = req.body;
     db.dbPostStudent('db.json', student).then(data => res.send(data));
 });
+
+app.get('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    // console.log(id);
+    // console.log("here " + db.dbGetStudentDetail('db.json', id));
+    db.dbGetStudentDetail('db.json', id).then(
+        student => {
+            if (!student) {
+                res.status(404).send("No student found with this id");
+                return;
+            }
+            // console.log(student);
+            res.send(student);
+        }
+    );
+})
 const port = 3000;
 
 app.listen(port, () => {
