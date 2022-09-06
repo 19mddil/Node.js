@@ -23,14 +23,42 @@ app.get('/api/students/:id', (req, res) => {
     // console.log("here " + db.dbGetStudentDetail('db.json', id));
     db.dbGetStudentDetail('db.json', id).then(
         student => {
-            if (!student) {
+            // console.log(student);
+            if (!student[1]) {
                 res.status(404).send("No student found with this id");
                 return;
             }
             // console.log(student);
-            res.send(student);
+            res.send(student[1]);
         }
     );
+})
+app.put('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const updatedStudent = req.body;
+    console.log(updatedStudent);
+    db.dbUpadteStudentDetail('db.json', id, updatedStudent).then(
+        student => {
+            if (!student) {
+                res.status(404).send("that student doesn't exist");
+            }
+            else {
+                res.send(student);
+            }
+        }
+    )
+})
+app.delete('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    db.dbDeleteStudent('db.json', id)
+        .then(s => {
+            if (!s) {
+                res.status(404).send("Not found to delete");
+            }
+            else {
+                res.send(s);
+            }
+        });
 })
 const port = 3000;
 
