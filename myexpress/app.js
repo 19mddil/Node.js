@@ -1,23 +1,17 @@
 const express = require('express');
 const { dbGetStudents } = require('./db');
 
+
 const app = express();
 const db = require('./db');
-
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.send("Hello from express");
-});
-app.get('/api/students', (req, res) => {
+const studentList = (req, res) => {
     db.dbGetStudents('db.json').then(students => res.send(students));
-});
-app.post('/api/students', (req, res) => {
+};
+const newStudentAdd = (req, res) => {
     const student = req.body;
     db.dbPostStudent('db.json', student).then(data => res.send(data));
-});
-
-app.get('/api/students/:id', (req, res) => {
+};
+const studentDetail = (req, res) => {
     const id = parseInt(req.params.id);
     // console.log(id);
     // console.log("here " + db.dbGetStudentDetail('db.json', id));
@@ -32,8 +26,8 @@ app.get('/api/students/:id', (req, res) => {
             res.send(student[1]);
         }
     );
-})
-app.put('/api/students/:id', (req, res) => {
+}
+const studentUpdate = (req, res) => {
     const id = parseInt(req.params.id);
     const updatedStudent = req.body;
     console.log(updatedStudent);
@@ -47,8 +41,8 @@ app.put('/api/students/:id', (req, res) => {
             }
         }
     )
-})
-app.delete('/api/students/:id', (req, res) => {
+};
+const studentDelete = (req, res) => {
     const id = parseInt(req.params.id);
     db.dbDeleteStudent('db.json', id)
         .then(s => {
@@ -59,7 +53,22 @@ app.delete('/api/students/:id', (req, res) => {
                 res.send(s);
             }
         });
-})
+};
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send("Hello from express");
+});
+
+
+app.get('/api/students', studentList);
+app.post('/api/students', newStudentAdd);
+app.get('/api/students/:id', studentDetail);
+app.put('/api/students/:id', studentUpdate);
+app.delete('/api/students/:id', studentDelete);
+
+
 const port = 3000;
 
 app.listen(port, () => {
