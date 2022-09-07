@@ -1,3 +1,4 @@
+//I can convert it into a class than use it as I will a kind of poly morphism
 const fs = require('fs');
 const { resolve } = require('path');
 // const { resolve } = require('path');
