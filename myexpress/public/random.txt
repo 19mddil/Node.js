@@ -1,1 +1,5 @@
-I am random text.
+sudo systemctl start mongod
+sudo systemctl status mongod
+sudo lsof -iTCP -sTCP:LISTEN | grep mongo
+sudo systemctl stop mongod
+mongosh

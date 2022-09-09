@@ -1,7 +1,6 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
-const morgan = require('morgan');
 
 const studentList = (req, res) => {
     db.dbGetStudents('db.json').then(students => res.send(students));
