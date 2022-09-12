@@ -21,5 +21,8 @@ const studentSchema = new mongoose.Schema({
         mother: String,
     },
     subjects: [{ name: String, mark: { type: Number, min: 0, max: 100 } }],
-
+    example: {
+        a: String,
+        type: { type: String },
+    }
 });

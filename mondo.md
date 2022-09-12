@@ -1,5 +1,18 @@
 # MongoDB Mongosh Shell commands
+[install on ubntu](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/)
+
 [crud operation doc](https://www.mongodb.com/docs/manual/crud/)
+
+## [Install Compass](https://linuxways.net/ubuntu/how-to-install-mongodb-compass-in-ubuntu-20-04/)
+```
+    $ wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
+    $ sudo apt install ./mongodb-compass_1.28.1_amd64.deb
+
+```
+## [Mongoose](https://mongoosejs.com/docs/guide.html)
+```
+    $ npm install mongoose
+```
 ## Inits
 ```
     > sudo systemctl start mongod
