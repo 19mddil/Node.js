@@ -30,30 +30,46 @@ const studentSchema = new mongoose.Schema({
 
 // Model
 const Student = mongoose.model('apprentices', studentSchema); //Class
-const student = new Student({
-    id: 3,
-    firstName: "Raju",
-    lastName: "Mostan",
-    dob: new Date("29 September 1978"),
-    passed: true,
-    hobbies: ["Swimming", "Singing"],
-    parents: {
-        father: "A",
-        mother: "B",
-    },
-    subjects: [{ name: "Math", mark: 80 }, { name: "English", mark: 90 }],
-});
 
-// async function saveStudent() {
-//     try {
-//         let studentData = await student.save();
-//         console.log(studentData);
-//         mongoose.connection.close();
-//     } catch (err) {
-//         console.log(err);
-//     }
 
-// }
+async function saveStudent() {
+    const student = new Student({
+        id: 4,
+        firstName: "Gaja",
+        lastName: "Fokir",
+        dob: new Date("29 September 1978"),
+        passed: true,
+        hobbies: ["Swimming", "Singing"],
+        parents: {
+            father: "A",
+            mother: "B",
+        },
+        subjects: [{ name: "Math", mark: 80 }, { name: "English", mark: 90 }],
+    });
+    try {
+        let studentData = await student.save();
+        console.log(studentData);
+        mongoose.connection.close();
+    } catch (err) {
+        console.log(err);
+    }
+
+}
 // saveStudent();
 
-student.save().then(data => console.log(data)).catch(err => console.log(err));
+// student.save().then(data => console.log(data)).catch(err => console.log(err));
+
+//R => Read
+
+async function readStudents() {
+    const studentData = await Student
+        .find()
+        .sort({ id: 1 })
+        .select({
+            firstName: 1,
+            lastName: 1,
+            hobbies: 1,
+        });
+    console.log(studentData);
+}
+readStudents();
