@@ -34,9 +34,9 @@ const Student = mongoose.model('apprentices', studentSchema); //Class
 
 async function saveStudent() {
     const student = new Student({
-        id: 4,
-        firstName: "Gaja",
-        lastName: "Fokir",
+        id: 2,
+        firstName: "Lana",
+        lastName: "Ann",
         dob: new Date("29 September 1978"),
         passed: true,
         hobbies: ["Swimming", "Singing"],
@@ -66,6 +66,7 @@ async function readStudents() {
         .find()
         .sort({ id: 1 })
         .select({
+            id: 1,
             firstName: 1,
             lastName: 1,
             hobbies: 1,
