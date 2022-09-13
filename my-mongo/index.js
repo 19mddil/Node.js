@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/my-students', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/STUDENTDB', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connected to mongodb successfully");
     })
@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost:27017/my-students', { useNewUrlParser: tru
     })
 
 const studentSchema = new mongoose.Schema({
+    id: { type: Number, unique: true },
     firstName: { type: String },
     lastName: String,
     dob: Date,
@@ -26,3 +27,33 @@ const studentSchema = new mongoose.Schema({
         type: { type: String },
     }
 });
+
+// Model
+const Student = mongoose.model('apprentices', studentSchema); //Class
+const student = new Student({
+    id: 3,
+    firstName: "Raju",
+    lastName: "Mostan",
+    dob: new Date("29 September 1978"),
+    passed: true,
+    hobbies: ["Swimming", "Singing"],
+    parents: {
+        father: "A",
+        mother: "B",
+    },
+    subjects: [{ name: "Math", mark: 80 }, { name: "English", mark: 90 }],
+});
+
+// async function saveStudent() {
+//     try {
+//         let studentData = await student.save();
+//         console.log(studentData);
+//         mongoose.connection.close();
+//     } catch (err) {
+//         console.log(err);
+//     }
+
+// }
+// saveStudent();
+
+student.save().then(data => console.log(data)).catch(err => console.log(err));
