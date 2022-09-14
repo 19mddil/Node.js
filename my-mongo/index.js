@@ -64,13 +64,25 @@ async function saveStudent() {
 async function readStudents() {
     const studentData = await Student
         .find()
-        .sort({ id: 1 })
         .select({
             id: 1,
             firstName: 1,
             lastName: 1,
-            hobbies: 1,
+            passed: 1,
         });
     console.log(studentData);
 }
 readStudents();
+async function updateStudent(id) {
+    const studentData = await Student.updateOne(
+        { id: id },
+        { $set: { passed: false } }
+    );
+    console.log(studentData);
+}
+// updateStudent(1);
+async function deleteStudent(id) {
+    const studentData = await Student.deleteOne({ id: id });
+    readStudents();
+}
+deleteStudent(2);
