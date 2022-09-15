@@ -4,18 +4,18 @@
 [crud operation doc](https://www.mongodb.com/docs/manual/crud/)
 
 ## [Install Compass](https://linuxways.net/ubuntu/how-to-install-mongodb-compass-in-ubuntu-20-04/)
-```
+``` bash
     $ wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
     $ sudo apt install ./mongodb-compass_1.28.1_amd64.deb
 
 ```
 ## [Mongoose](https://mongoosejs.com/docs/guide.html)
-```
+``` bash
     $ npm install mongoose
 ```
 ## [Mongoose-Validation](https://mongoosejs.com/docs/validation.html)
 ## Inits
-```
+``` bash
     > sudo systemctl start mongod
     > sudo systemctl status mongod
     > sudo lsof -iTCP -sTCP:sLISTEN | grep mongo
@@ -24,7 +24,7 @@
     > cls
 ```
 ## Create
-```
+``` bash
     > show dbs
     > use my-test
     my-test> db.students.insertOne({name: "Simanta Paul",age: 18,hobbies:["Chess","Fuck"]})
@@ -34,7 +34,7 @@
     ])
 ```
 ## Fetch
-```
+``` bash
     my-test> db.students.find()
     my-test> db.students.find().pretty()
     my-test> db.students.find({ name : "Lara" }).pretty();
@@ -46,11 +46,11 @@
     my-test> db.students.find({ $or: [{ name: "Ada" },{ age : 25 }] })
 ```
 ### Update
-```
+``` bash
     > db.students.updateOne({age : 9},{ $set : {hobbie : ['coding']} })
     > db.students.updateOne({age : 9},{ $set : {name : 'Ada Byren',hobbie :     ['coding','piano']} })
 ```
 ### Delete
-```
+``` bash
     > db.students.deleteOne({ age: 25 })
 ```
