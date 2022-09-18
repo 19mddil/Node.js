@@ -8,10 +8,10 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/my-student-DB', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    // useCreateIndex: true,
 })
     .then(() => console.log("Connection to mongoDB successful"))
-    .catch(err => console.error("Mongodb connection failed"));
+    .catch(err => console.log(err));
 
 app.use(express.json());
 app.use(morgan('dev'));
