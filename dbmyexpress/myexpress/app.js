@@ -4,6 +4,7 @@ const studentRouter = require('./routers/studentRouter');
 const userRouter = require('./routers/userRouter');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const authRouter = require('./routers/authRouter');
 
 mongoose.connect('mongodb://localhost:27017/my-student-DB', {
     useNewUrlParser: true,
@@ -18,6 +19,7 @@ app.use(morgan('dev'));
 
 app.use('/api/students', studentRouter);
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 
 app.get('/', (req, res, next) => {
     // res.send("Another response!");
