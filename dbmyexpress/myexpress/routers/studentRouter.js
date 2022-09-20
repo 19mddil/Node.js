@@ -3,6 +3,7 @@ const { Student } = require('../models/students');//{ Student: Model { Student }
 const router = express.Router();
 
 const studentList = async (req, res) => {
+    console.log(req.header);
     try {
         const studentList = await Student.find().sort({ name: 1 });
         res.send(studentList);
