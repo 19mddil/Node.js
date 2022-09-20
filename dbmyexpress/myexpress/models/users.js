@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const jwt = require('jsonwebtoken');
 const userSchema = Schema({
     name: {
         type: String,
@@ -25,7 +26,7 @@ userSchema.methods.generateJWT = function () {
     const token = jwt.sign(
         {
             _id: this._id,
-            email: this.email
+            email: this.email,
         },
         process.env.mySecretKey
     );

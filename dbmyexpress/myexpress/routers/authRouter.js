@@ -15,8 +15,9 @@ const authUser = async (req, res) => {
 
     const token = user.generateJWT();
 
-
-    res.send(token);
+    res.send({
+        token: token,
+    });
 }
 
 router.route('/')

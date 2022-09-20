@@ -1,3 +1,8 @@
+# JWT
+## [JWT](https://jwt.io/)
+``` shell
+    npm i jsonwebtoken
+```
 # MongoDB Mongosh Shell commands
 [install on ubntu](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/)
 
