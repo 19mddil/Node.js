@@ -1,3 +1,7 @@
+# NODE
+```shell
+    killall node
+```
 # JWT
 ## [JWT](https://jwt.io/)
 ``` shell
