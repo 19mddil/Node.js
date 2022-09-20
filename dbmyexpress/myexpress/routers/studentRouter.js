@@ -16,6 +16,7 @@ const studentList = async (req, res) => {
     }
 };
 const newStudentAdd = async (req, res) => {
+    console.log(req.header('Content-Type'));
     const student = new Student(req.body);
     try {
         let studentData = await student.save();
