@@ -1,9 +1,9 @@
 const express = require('express');
 const { Student } = require('../models/students');//{ Student: Model { Student } }
 const router = express.Router();
+const authorize = require('../middlewares/authorize');
 
 const studentList = async (req, res) => {
-    console.log(req.header);
     try {
         const studentList = await Student.find().sort({ name: 1 });
         res.send(studentList);
@@ -78,7 +78,7 @@ const studentDelete = async (req, res) => {
 };
 
 router.route('/')
-    .get(studentList)
+    .get(authorize, studentList)
     .post(newStudentAdd);
 router.route('/:id')
     .get(studentDetail)
