@@ -2,6 +2,8 @@ const express = require('express');
 const { Student } = require('../models/students');//{ Student: Model { Student } }
 const router = express.Router();
 const authorize = require('../middlewares/authorize');
+const isAdmin = require('../middlewares/admin');
+
 
 const studentList = async (req, res) => {
     try {
@@ -51,7 +53,7 @@ const studentUpdate = async (req, res) => {
             useFindAndModify: false,
         });
         if (!student) {
-            console.log("here");
+            // console.log("here");
             return res.status(404).send("Id not found");
         }
         res.send(student);
@@ -63,26 +65,27 @@ const studentUpdate = async (req, res) => {
 };
 const studentDelete = async (req, res) => {
     const id = req.params.id;
+    // console.log(id);
     try {
         const student = await Student.findByIdAndDelete(id);
         if (!student) {
-            console.log("here");
+            // console.log("here");
             return res.status(404).send("Id not found");
         }
         res.send(student);
     } catch (err) {
-        console.log("here");
+        // console.log("here");
         return res.status(404).send("Id not found");
     }
 
 };
 
 router.route('/')
-    .get(authorize, studentList)
+    .get([authorize, isAdmin], studentList)
     .post(newStudentAdd);
 router.route('/:id')
     .get(studentDetail)
     .put(studentUpdate)
-    .delete(studentDelete);
+    .delete([authorize, isAdmin], studentDelete);
 
 module.exports = router;

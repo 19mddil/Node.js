@@ -22,7 +22,8 @@ const newUser = async (req, res) => {
     user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role,
     })
 
     const salt = await bcrypt.genSalt(10);
@@ -35,7 +36,8 @@ const newUser = async (req, res) => {
             token: token,
             data: {
                 name: result.name,
-                email: result.email
+                email: result.email,
+                role: result.role,
             }
         });
     }

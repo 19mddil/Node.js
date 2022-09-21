@@ -19,6 +19,11 @@ const userSchema = Schema({
         required: true,
         minlength: 5,
         maxlength: 1024
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user',
     }
 });
 
@@ -27,6 +32,7 @@ userSchema.methods.generateJWT = function () {
         {
             _id: this._id,
             email: this.email,
+            role: this.role,
         },
         process.env.mySecretKey
     );
