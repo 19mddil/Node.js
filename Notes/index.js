@@ -1,2 +1,10 @@
-const fs = require('fs');
-fs.writeFileSync('./files/output.txt', fs.readFileSync('./files/input.txt', 'utf-8'));
+const MyEvent = require('./MyEvent');
+
+const event = new MyEvent('click');
+
+event.on('click', () => {
+    console.log('click');
+})
+
+event.function1();
+
