@@ -1,5 +1,2 @@
-const circle = require('./circle');
-
-console.log(circle.area(4));
-console.log(circle.circumference(4));
-console.log(circle.pi);
+const fs = require('fs');
+fs.writeFileSync('./files/output.txt', fs.readFileSync('./files/input.txt', 'utf-8'));
