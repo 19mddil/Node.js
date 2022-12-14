@@ -1,4 +1,4 @@
-# [Node](https://nodejs.org/en/)
+# [Node](https://nodejs.org/docs/latest-v17.x/api/)
 # Global Object
 ## Code
 ```js
