@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "date-format": "^4.0.14"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0"
   }
 }
