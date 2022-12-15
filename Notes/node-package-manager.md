@@ -62,8 +62,26 @@ To avoid the question
  ```
  # To view local and global package installation path
  ```bash
-mddilshad@mddilshad-HP-ProBook-450-G5:~/Desktop/nodejs/final/npm-app$ npm root
+~/Desktop/nodejs/final/npm-app$ npm root
 /home/mddilshad/Desktop/nodejs/final/npm-app/node_modules
-mddilshad@mddilshad-HP-ProBook-450-G5:~/Desktop/nodejs/final/npm-app$ npm root -g
+~/Desktop/nodejs/final/npm-app$ npm root -g
 /home/mddilshad/.nvm/versions/node/v14.17.6/lib/node_modules
+ ```
+
+ # Upadating and uninstalling packages
+ ```bash
+  ~/Desktop/nodejs/final/npm-app$ npm outdated
+  ~/Desktop/nodejs/final/npm-app$ npm update #this only updated to lasted minor versin
+  ~/Desktop/nodejs/final/npm-app$ npm outdated -g #global update
+  Package  Current  Wanted  Latest  Location              Depended by
+  heroku    7.63.4  7.67.1  7.67.1  node_modules/heroku   global
+  nodemon   2.0.19  2.0.20  2.0.20  node_modules/nodemon  global
+  ~/Desktop/nodejs/final/npm-app$ npm install -g  nodemon@2.0.20
+  ~/Desktop/nodejs/final/npm-app$ npm outdated -g
+  Package  Current  Wanted  Latest  Location             Depended by
+  heroku    7.63.4  7.67.1  7.67.1  node_modules/heroku  global
+
+
+  ~/Desktop/nodejs/final/npm-app$ npm un react # uninstalling from local
+  ~/Desktop/nodejs/final/npm-app$ npm un nodemon -g # uninstalling from global
  ```
