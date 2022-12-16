@@ -18,6 +18,28 @@ app.post('/api/students', (req, res) => {
     db.insertDbStudents(req.body).then(data => res.send(data));
 })
 
+app.get('/api/students/:id', (req, res) => {
+    db.getStudentDetail(id).then(data => {
+        if (data) {
+            res.send(data);
+        }
+        else {
+            res.status(404).send("Not actually found!");
+        }
+    })
+})
+
+app.put('/api/students/:id', (req, res) => {
+    const updatedStudent = req.body;
+    console.log(updatedStudent);
+    db.updateStudentDetail(req.params.id, updatedStudent).then(data => {
+        if (data) {
+            res.send(data);
+        } else {
+            res.status(404).send("Not Found");
+        }
+    })
+})
 const port = 3000;
 
 app.listen(port, () => {
