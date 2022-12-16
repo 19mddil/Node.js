@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const db = require('./db');
 const app = express();
 
 app.use(express.json());
@@ -10,22 +10,12 @@ app.get('/', (req, res) => {
 
 //something we fetch from databases
 app.get('/api/students', (req, res) => {
-    fs.readFile('./db.json', 'utf-8', (err, data) => {
-        res.send(JSON.parse(data).students);
-        res.end();
-    })
+    db.getDbStudents().then(data => res.send(data));
 })
 
 // something is comming from form
 app.post('/api/students', (req, res) => {
-    fs.readFile('./db.json', 'utf-8', (err, data) => {
-        const students = JSON.parse(data);
-        students.students.push(req.body);
-        fs.writeFile('./db.json', JSON.stringify(students, null, 2), err => {
-            res.send(students);
-            res.end();
-        })
-    })
+    db.insertDbStudents(req.body).then(data => res.send(data));
 })
 
 const port = 3000;
