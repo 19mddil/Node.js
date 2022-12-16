@@ -85,3 +85,42 @@ To avoid the question
   ~/Desktop/nodejs/final/npm-app$ npm un react # uninstalling from local
   ~/Desktop/nodejs/final/npm-app$ npm un nodemon -g # uninstalling from global
  ```
+ # Publishing own package
+  ```bash
+  npm init
+  touch index.js
+  ```
+  ![own package](src/img/own-package.png)
+
+  if you do not have any account, add account
+  ```bash
+  npm adduser # it will redirect you to the browser and just sign up
+  npm login
+  #set a package name
+  npm publish 
+  npm notice 
+npm notice 📦  trapizium69@1.0.0
+npm notice === Tarball Contents === 
+npm notice 76B  index.js    
+npm notice 224B package.json
+npm notice === Tarball Details === 
+npm notice name:          trapizium69                             
+npm notice version:       1.0.0                                   
+npm notice filename:      trapizium69-1.0.0.tgz                   
+npm notice package size:  323 B                                   
+npm notice unpacked size: 300 B                                   
+npm notice shasum:        b860c40f4383f48c7541381ebc7f79344a69719d
+npm notice integrity:     sha512-e2oVgGvNysUtc[...]dB/s33bBFstEQ==
+npm notice total files:   2                                       
+npm notice 
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
++ trapizium69@1.0.0
+  ```
+```bash
+  npm search trapizium69 # to find the package
+```
+```bash
+# Publishing after major,minor or patch update
+npm version patch #or minor or major 
+npm publish
+```
