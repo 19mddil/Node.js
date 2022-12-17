@@ -40,6 +40,17 @@ app.put('/api/students/:id', (req, res) => {
         }
     })
 })
+
+app.delete('/api/students/:id', (req, res) => {
+    db.deleteStudentDetail(req.params.id).then(data => {
+        if (data) {
+            res.send(data);
+        } else {
+            res.status(404).send("Not found anything to delete");
+        }
+    })
+})
+
 const port = 3000;
 
 app.listen(port, () => {

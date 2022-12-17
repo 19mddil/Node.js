@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { resolve } = require('path');
 
 getDbStudents = () => new Promise((resolve, reject) => {
     fs.readFile('./db.json', 'utf-8', (err, data) => {
@@ -41,7 +42,24 @@ updateStudentDetail = (id, updatedStudent) => new Promise((resolve, reject) => {
     })
 })
 
+deleteStudentDetail = id => new Promise((resolve, reject) => {
+    this.getStudentDetail(id).then(data => {
+        if (data) {
+            getDbStudents().then(students => {
+                students = JSON.parse(students);
+                id = parseInt(id);
+                students.students = students.students.filter(s => s.id !== id);
+                fs.writeFile('./db.json', JSON.stringify(students, null, 2), () => {
+
+                })
+            })
+        }
+        resolve(data);
+    })
+})
+
 module.exports.getDbStudents = getDbStudents;
 module.exports.insertDbStudents = insertDbStudent;
 module.exports.getStudentDetail = getStudentDetail;
 module.exports.updateStudentDetail = updateStudentDetail;
+module.exports.deleteStudentDetail = deleteStudentDetail;
