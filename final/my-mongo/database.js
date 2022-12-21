@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const student = require('./student');
 mongoose.set('strictQuery', true);
 
 const connectDB = async () => {
