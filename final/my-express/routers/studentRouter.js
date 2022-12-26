@@ -1,51 +1,82 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db.js')
+const { Student } = require('../models/student');
+const { create, NOTCONNECTED, connectDB } = require('../db');
+const mongoose = require('mongoose');
 
-const studentList = (req, res) => {
-    db.getDbStudents().then(data => res.send(data));
+const errors = e => {
+    let errorArray = [];
+    for (err in e.errors) {
+        errorArray.push(e.errors[err].message);
+    }
+    return errorArray;
 }
 
-const postStudent = (req, res) => {
-    db.insertDbStudents(req.body).then(data => res.send(data));
+const studentList = async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://localhost:27017/my_students');
+        }
+        let students = await Student.find();
+        res.status(200).send(students);
+    } catch (e) {
+        res.status(400).send(errors(e));
+    }
 }
 
-const studentDetail = (req, res) => {
-    db.getStudentDetail(req.params.id).then(data => {
-        if (data) {
-            res.send(data);
+const studentCreate = async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://localhost:27017/my_students');
         }
-        else {
-            res.status(404).send("Not actually found!");
-        }
-    })
+        let student = await Student.create(req.body);
+        res.status(201).send(student);
+    } catch (e) {
+        res.status(400).send(errors(e));
+    }
 }
 
-const studentUpdate = (req, res) => {
-    const updatedStudent = req.body;
-    console.log(updatedStudent);
-    db.updateStudentDetail(req.params.id, updatedStudent).then(data => {
-        if (data) {
-            res.send(data);
-        } else {
-            res.status(404).send("Not Found");
+const studentDetail = async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://localhost:27017/my_students');
         }
-    })
+        let student = await Student.find({ _id: req.params.id });
+        res.status(200).send(student);
+    } catch (e) {
+        res.status(400).send(errors(e));
+    }
+}
+
+const studentUpdate = async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://localhost:27017/my_students');
+        }
+        let updatedStudent = await Student.updateOne({ _id: req.params.id }, {
+            $set: req.body
+        });
+        res.send(200).status(updatedStudent);
+    } catch (e) {
+        res.status(400).send(errors(e));
+    }
 };
 
-const studentDelete = (req, res) => {
-    db.deleteStudentDetail(req.params.id).then(data => {
-        if (data) {
-            res.send(data);
-        } else {
-            res.status(404).send("Not found anything to delete");
+const studentDelete = async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://localhost:27017/my_students');
         }
-    })
+        let student = await Student.deleteOne({ _id: req.params.id });
+        res.status(200).send(student);
+    } catch (e) {
+        res.status(400).send(errors(e));
+    }
 };
 
 router.route('/')
     .get(studentList)
-    .post(postStudent);
+    .post(studentCreate);
 
 router.route('/:id')
     .get(studentDetail)
