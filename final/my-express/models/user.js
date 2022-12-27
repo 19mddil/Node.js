@@ -21,6 +21,6 @@ const userSchema = Schema({
         maxlength: 1024,
     }
 })
-const User = model('User', userSchema);
+const User = model('User', userSchema)
 
 module.exports.User = User;
