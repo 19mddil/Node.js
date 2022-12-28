@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const studentRouter = require('./routers/studentRouter');
+const userRouter = require('./routers/userRouter');
 const { connectDB } = require('./db');
 const mongoose = require('mongoose');
 
@@ -14,7 +15,8 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 
 
-app.use('/api/students', studentRouter)
+app.use('/api/students', studentRouter);
+app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
     res.send("Hi, this is the home page.");

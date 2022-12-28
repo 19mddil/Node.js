@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Student } = require('../models/student');
-const { create, NOTCONNECTED, connectDB } = require('../db');
 const mongoose = require('mongoose');
 
 const errors = e => {
