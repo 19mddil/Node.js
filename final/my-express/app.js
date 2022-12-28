@@ -6,14 +6,21 @@ const userRouter = require('./routers/userRouter');
 const authRouter = require('./routers/authRouter');
 const { connectDB } = require('./db');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
+dotenv.config({ path: 'config.env' });
 
 
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'development') {
+    console.log('development server');
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.static('public'));
+    app.use(morgan('dev'));
+}
+
 
 
 app.use('/api/students', studentRouter);
@@ -25,7 +32,7 @@ app.get('/', (req, res) => {
 })
 
 
-const port = 3000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
     console.log("Listening on 3000...")
