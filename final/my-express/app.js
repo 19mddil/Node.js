@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const studentRouter = require('./routers/studentRouter');
 const userRouter = require('./routers/userRouter');
+const authRouter = require('./routers/authRouter');
 const { connectDB } = require('./db');
 const mongoose = require('mongoose');
 
@@ -17,6 +18,7 @@ app.use(morgan('dev'));
 
 app.use('/api/students', studentRouter);
 app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => {
     res.send("Hi, this is the home page.");
