@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Student } = require('../models/student');
 const mongoose = require('mongoose');
+const authorize = require('../middlewares/authorize');
 
 const errors = e => {
     let errorArray = [];
@@ -12,6 +13,7 @@ const errors = e => {
 }
 
 const studentList = async (req, res) => {
+    console.log(req.user);
     try {
         if (mongoose.connection.readyState === 0) {
             await mongoose.connect('mongodb://localhost:27017/my_students');
@@ -74,13 +76,13 @@ const studentDelete = async (req, res) => {
 };
 
 router.route('/')
-    .get(studentList)
-    .post(studentCreate);
+    .get(authorize, studentList)
+    .post(authorize, studentCreate);
 
 router.route('/:id')
-    .get(studentDetail)
-    .put(studentUpdate)
-    .delete(studentDelete);
+    .get(authorize, studentDetail)
+    .put(authorize, studentUpdate)
+    .delete(authorize, studentDelete);
 
 module.exports = router;
 
