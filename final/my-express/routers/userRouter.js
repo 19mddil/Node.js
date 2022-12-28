@@ -3,7 +3,6 @@ const router = express.Router();
 const { User } = require('../models/user');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 
 const errors = e => {
@@ -25,8 +24,7 @@ const userCreate = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt);
         let user = await User.create(req.body);
-
-        res.status(201).send(jwt.sign({ _id: user.id, email: user.email }, 'secretKey'));
+        res.status(200).send({ data: user, token: user.genJWT() });
     } catch (e) {
         res.status(400).send(errors(e));
     }

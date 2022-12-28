@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 const errors = e => {
     let errorArray = [];
@@ -22,7 +21,7 @@ const userAuthentication = async (req, res) => {
         if (!user) return res.status(400).send("email or password error");
         const boolvar = await bcrypt.compare(req.body.password, user.password);
         if (boolvar) {
-            res.status(201).send(jwt.sign({ _id: user.id, email: user.email }, 'secretKey'));
+            res.status(201).send({ token: user.genJWT() });
         } else {
             res.status(200).send("username or password error");
         }
