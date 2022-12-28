@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require('../models/user');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const authorize = require('../middlewares/authorize');
 
 
 const errors = e => {
@@ -34,5 +35,9 @@ const userCreate = async (req, res) => {
 router
     .route('/')
     .post(userCreate);
+router.route('/about')
+    .get(authorize, (req, res) => {
+        res.status(200).send(req.user);
+    });
 
 module.exports = router;
