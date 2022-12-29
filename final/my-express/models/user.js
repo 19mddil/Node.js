@@ -20,11 +20,16 @@ const userSchema = Schema({
         required: true,
         minlength: 5,
         maxlength: 1024,
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
     }
 })
 
 userSchema.methods.genJWT = function () {
-    return jwt.sign({ _id: this.id, email: this.email }, process.env.SECRETKEY);
+    return jwt.sign({ _id: this.id, email: this.email, role: this.role }, process.env.SECRETKEY);
 }
 
 const User = model('User', userSchema)

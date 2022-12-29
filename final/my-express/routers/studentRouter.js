@@ -3,6 +3,7 @@ const router = express.Router();
 const { Student } = require('../models/student');
 const mongoose = require('mongoose');
 const authorize = require('../middlewares/authorize');
+const admin = require('../middlewares/admin');
 
 const errors = e => {
     let errorArray = [];
@@ -82,7 +83,7 @@ router.route('/')
 router.route('/:id')
     .get(authorize, studentDetail)
     .put(authorize, studentUpdate)
-    .delete(authorize, studentDelete);
+    .delete([authorize, admin], studentDelete);
 
 module.exports = router;
 
