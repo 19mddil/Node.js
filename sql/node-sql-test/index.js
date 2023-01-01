@@ -15,6 +15,8 @@ let student = {
     name: "Md.Dilshad"
 }
 
+
+
 const createData = (conn, obj) => {
     let sql = `INSERT INTO shcool.student (class,name) VALUES ("${obj.class}", "${obj.name}");`
     conn.query(sql, e => {
